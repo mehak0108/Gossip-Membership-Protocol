@@ -49,7 +49,7 @@ Here are the functionalities your implementation must have:
 
 Initially the processes while connecting on the network introduce themselves to the group. If there is no group  available then that process becomes the group booter and boots up the group. If processes are already present in the group then it sends a JOINREQ to them.  
 
-There is a meesage queue for each of the processes which contains different types of messages like reply for join request (JOINREP), creating join request (JOINREQ) and ping messages. Consider a process P1 from the group with it's message queue. Now If message type received by P1 is JOINREQ then it sends a JOINREP to P2 over the EmulNet. After this P1 sends hearbeats to other processes in the group. When P2 receives the message from P1 two cases arise for the membership list of P2. First is that the process P3 is not in the list of P2 so it will add it with it's hearbeat. Second is that the process P3 is already present in the group and so it updates the heartbeat of this process. This updated info of the list is then gossiped to other processes. If the message type received was JOINREP or PING it simply sends heartbeats to other processes.  
+There is a message queue for each of the processes which contains different types of messages like reply for join request (JOINREP), creating join request (JOINREQ) and ping messages. Consider a process P1 from the group with it's message queue. Now If message type received by P1 is JOINREQ then it sends a JOINREP to P2 over the EmulNet. After this P1 sends hearbeats to other processes in the group. When P2 receives the message from P1 two cases arise for the membership list of P2. First is that the process P3 is not in the list of P2 so it will add it with it's hearbeat. Second is that the process P3 is already present in the group and so it updates the heartbeat of this process. This updated info of the list is then gossiped to other processes. If the message type received was JOINREP or PING it simply sends heartbeats to other processes.  
 
 If the heartbeat of the process in the membership list is not updated for a specific time period then the process is said to timeout and its entry is removed from the membership list and this information is gossiped to rest of the processes.
 
@@ -61,7 +61,7 @@ grades each of them on 3 separate metrics. The scenarios are as follows:
 2. Multiple node failure  
 3. Single node failure under a lossy network.  
 
-Navigate in the directory of the project and then perform the following commands:
+Navigate in the directory of the project and then perform:
 
 ```
 	$ make
