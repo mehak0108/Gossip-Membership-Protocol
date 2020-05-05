@@ -273,7 +273,7 @@ void MP1Node::nodeLoopOps() {
 	 * Your code goes here
 	 */
 
-    for(vector<MemberListEntry>::iterator it = memberNode->memberList.begin(); it != memberNode->memberList.end(); it++)
+    for(vector<MemberListEntry>::iterator it = memberNode->memberList.begin(); it != memberNode->memberList.end(); )
     {
         if (par->getcurrtime() - it->timestamp > TREMOVE ) 
         {
@@ -284,17 +284,12 @@ void MP1Node::nodeLoopOps() {
             // log->LOG(&memberNode->addr, ss.str().c_str());
             // ss.str("");
 
-            // it = memberNode->memberList.erase(it);
-            vector<MemberListEntry>::iterator next_it = it;
-            vector<MemberListEntry>::iterator next_next_it = it+1;
-            for (next_it = it; next_next_it != memberNode->memberList.end(); next_it++, next_next_it++) {
-                *next_it = *next_next_it;
-            }
-            memberNode->memberList.resize(memberNode->memberList.size()-1);
-            it--;
+            it = memberNode->memberList.erase(it);
             LogMemberList();
             log->logNodeRemove(&(memberNode->addr), &dst_addr);
         }
+        else
+            ++it;
     }
 
     memberNode->heartbeat++;
